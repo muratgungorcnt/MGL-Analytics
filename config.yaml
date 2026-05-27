@@ -1,0 +1,195 @@
+# ===================================================
+# MGL Analytics - Production Configuration
+# ===================================================
+
+# Telegram Configuration
+telegram:
+  token: "${TELEGRAM_TOKEN}"  # Set via environment variable
+  chat_id: "${TELEGRAM_CHAT_ID}"  # Set via environment variable
+  timeout: 15
+  max_retries: 3
+
+# API Configuration
+api:
+  binance:
+    base_url: "https://api.binance.com/api/v3"
+    timeout: 15
+    rate_limit: 50
+  yahoo:
+    base_url: "https://query1.finance.yahoo.com"
+    timeout: 15
+
+# Rate Limiting
+rate_limit:
+  enabled: true
+  requests_per_second: 50
+  burst_size: 100
+
+# Database Configuration
+database:
+  path: "data/analytics.db"
+  max_records_per_symbol: 500
+  cleanup_interval: 3600
+  backup_enabled: true
+  backup_interval: 86400
+
+# Signal Configuration
+signals:
+  duplicate_check_interval: 300
+  alarm_threshold_crypto: 2.0
+  alarm_threshold_global: 2.0
+  alarm_threshold_bist: 1.0
+  whale_threshold: 300.0
+
+# Technical Indicators
+indicators:
+  rsi_period: 14
+  macd_fast: 12
+  macd_slow: 26
+  macd_signal: 9
+  stochastic_period: 14
+  volume_period: 20
+
+# Market Hours (Istanbul Timezone)
+market_hours:
+  bist:
+    open: 9
+    close: 18
+  usa:
+    open: 16
+    close: 23
+
+# Reporting Configuration
+reports:
+  schedule:
+    - "09:00"
+    - "13:00"
+    - "19:00"
+  excel_filename: "MGL_Analytics_Rapor.xlsx"
+
+# Portfolio Tracking
+portfolio:
+  watch_enabled: true
+  watch_schedule_hour: 21
+  assets:
+    - symbol: "AFT"
+      cost_basis: 15000.0
+    - symbol: "BTC"
+      cost_basis: 9000.0
+    - symbol: "TTE"
+      cost_basis: 6000.0
+  thresholds:
+    upper_limit: 35000.0
+    lower_limit: 27000.0
+
+# Cryptocurrency Tracking (Top 50)
+cryptocurrencies:
+  enabled: true
+  check_interval: 3600
+  symbols:
+    - "BTCUSDT"
+    - "ETHUSDT"
+    - "BNBUSDT"
+    - "XRPUSDT"
+    - "SOLUSDT"
+    - "ADAUSDT"
+    - "DOGEUSDT"
+    - "MATICUSDT"
+    - "AVAXUSDT"
+    - "LITUSDT"
+    - "LINKUSDT"
+    - "UNIUSDT"
+    - "ATOMUSDT"
+    - "FTMUSDT"
+    - "ARBITUSDT"
+    - "OPTIMUSDT"
+    - "MANAUSDT"
+    - "SANDUSDT"
+    - "ENUSDT"
+    - "GRTUSDT"
+    - "GMXUSDT"
+    - "AAVEUSDT"
+    - "COMPUSDT"
+    - "SNXUSDT"
+    - "MKRUSDT"
+    - "ZECUSDT"
+    - "XLMUSDT"
+    - "FILUSDT"
+    - "VETUSDT"
+    - "THETAUSDT"
+    - "EOSUSDT"
+    - "ALGOUSDT"
+    - "WAVESUSDT"
+    - "ZRXUSDT"
+    - "NEOUSDT"
+    - "ONTUSDT"
+    - "ZENUSDT"
+    - "IOSTUSDT"
+    - "CRVUSDT"
+    - "BALANCERUSDT"
+    - "LRCUSDT"
+    - "ANTUSDT"
+    - "BANDUSDT"
+    - "CHZUSDT"
+    - "HBARUSDT"
+    - "FETUSDT"
+    - "GTUSDT"
+    - "STXUSDT"
+    - "SUSHIUSDT"
+    - "KSMUSDT"
+
+# BIST (Istanbul Stock Exchange) Tracking
+bist:
+  enabled: true
+  check_interval: 3600
+  symbols:
+    THYAO: "Turkish Airlines"
+    EREGL: "Eregli Iron Steel"
+    ASELS: "Aselsan"
+    GARAN: "Garanti BBVA"
+    AKBNK: "Akbank"
+    ISCTR: "Is Bank"
+    YKBNK: "Yapi Kredi"
+    VAKBN: "Vakifbank"
+    HALKB: "Halk Bank"
+    KCHOL: "Koc Holding"
+    SAHOL: "Sabanci Holding"
+    SISE: "Sisecam"
+    TUPRS: "Tupras"
+    PETKM: "Petkim"
+    PGSUS: "Pegasus"
+    BIMAS: "BIM Magazalar"
+    EKGYO: "Emlak Konut"
+    HEKTS: "Hektas"
+    SASA: "Sasa Polyester"
+    TCELL: "Turkcell"
+    AEFES: "Anadolu Efes"
+    AKENR: "Akenerji"
+    AKSA: "Aksa Acrylic"
+    AKSGY: "Aksigorta"
+    ARCLK: "Arcelik"
+    ENKAI: "Enkai Construction"
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file:
+    enabled: true
+    directory: "logs"
+    rotation: "daily"
+    retention_days: 30
+
+# System Configuration
+system:
+  timezone: "Europe/Istanbul"
+  test_mode: false
+  debug_mode: false
+  max_workers: 10
+  graceful_shutdown_timeout: 30
+
+# Notification Configuration
+notifications:
+  telegram_enabled: true
+  emoji_enabled: true
+  include_full_analysis: true
